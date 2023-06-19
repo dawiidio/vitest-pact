@@ -12,22 +12,22 @@ interface ExtraOptions {
   logFileName?: string;
 }
 
-export type JestPactOptions = PactOptions & ExtraOptions;
+export type VitePactOptions = PactOptions & ExtraOptions;
 
-export type JestMessageConsumerOptions = MessageConsumerOptions & ExtraOptions;
+export type ViteMessageConsumerOptions = MessageConsumerOptions & ExtraOptions;
 
-export type JestProvidedPactFn = (provider: Pact) => void;
+export type ViteProvidedPactFn = (provider: Pact) => void;
 
 export type JestProvidedMessagePactFn = (
   messagePact: MessageConsumerPact
 ) => void;
 
 export type PactWith = WrapperWithOnlyAndSkip<
-  JestPactOptions,
-  JestProvidedPactFn
+  VitePactOptions,
+  ViteProvidedPactFn
 >;
 
 export type MessagePactWith = WrapperWithOnlyAndSkip<
-  JestMessageConsumerOptions,
+  ViteMessageConsumerOptions,
   JestProvidedMessagePactFn
 >;

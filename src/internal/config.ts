@@ -1,12 +1,12 @@
 import { PactfileWriteMode, LogLevel } from '@pact-foundation/pact';
 import * as path from 'path';
-import { JestMessageConsumerOptions, JestPactOptions } from '../types';
+import { ViteMessageConsumerOptions, VitePactOptions } from '../types';
 
-const logHint = (options: JestPactOptions) =>
+const logHint = (options: VitePactOptions) =>
   options.port ? `-port-${options.port}` : '';
 
 const applyCommonDefaults = (
-  options: JestPactOptions | JestMessageConsumerOptions
+  options: VitePactOptions | ViteMessageConsumerOptions
 ) => ({
   log: path.resolve(
     options.logDir ? options.logDir : path.join(process.cwd(), 'pact', 'logs'),
@@ -22,16 +22,16 @@ const applyCommonDefaults = (
 });
 
 export const applyPactOptionDefaults = (
-  options: JestPactOptions
-): JestPactOptions => ({
+  options: VitePactOptions
+): VitePactOptions => ({
   ...applyCommonDefaults(options),
   spec: 2,
   ...options,
 });
 
 export const applyMessagePactOptionDefaults = (
-  options: JestMessageConsumerOptions
-): JestMessageConsumerOptions => ({
+  options: ViteMessageConsumerOptions
+): ViteMessageConsumerOptions => ({
   ...applyCommonDefaults(options),
   spec: 3,
   ...options,

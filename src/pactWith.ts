@@ -4,9 +4,9 @@ import { WrapperFn } from './internal/types';
 import { withTimeout } from './internal/withTimeout';
 
 import { extendPactWith } from './internal/scaffold';
-import { JestPactOptions, JestProvidedPactFn } from './types';
+import { VitePactOptions, ViteProvidedPactFn } from './types';
 
-const setupProvider = (options: JestPactOptions): Pact => {
+const setupProvider = (options: VitePactOptions): Pact => {
   const pactMock: Pact = new Pact(options);
 
   beforeAll(() => pactMock.setup());
@@ -23,8 +23,8 @@ export const getProviderBaseUrl = (provider: Pact): string =>
     : `http://${provider.opts.host}:${provider.opts.port}`;
 
 const pactWithWrapper = (
-  options: JestPactOptions,
-  tests: JestProvidedPactFn
+  options: VitePactOptions,
+  tests: ViteProvidedPactFn
 ): void => {
   withTimeout(options, () => {
     tests(setupProvider(applyPactOptionDefaults(options)));
@@ -32,9 +32,9 @@ const pactWithWrapper = (
 };
 
 export const pactWith = extendPactWith<
-  JestPactOptions,
-  JestProvidedPactFn,
-  WrapperFn<JestPactOptions, JestProvidedPactFn>
+  VitePactOptions,
+  ViteProvidedPactFn,
+  WrapperFn<VitePactOptions, ViteProvidedPactFn>
 >(pactWithWrapper);
 
 export const xpactWith = pactWith.skip;

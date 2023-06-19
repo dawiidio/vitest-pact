@@ -5,14 +5,14 @@ import { WrapperFn } from './internal/types';
 import { withTimeout } from './internal/withTimeout';
 
 import { extendPactWith } from './internal/scaffold';
-import { JestMessageConsumerOptions, JestProvidedMessagePactFn } from './types';
+import { ViteMessageConsumerOptions, JestProvidedMessagePactFn } from './types';
 
 const setupMessageProvider = (
-  options: JestMessageConsumerOptions
+  options: ViteMessageConsumerOptions
 ): MessageConsumerPact => new MessageConsumerPact(options);
 
 const jestMessagePactWrapper = (
-  options: JestMessageConsumerOptions,
+  options: ViteMessageConsumerOptions,
   tests: JestProvidedMessagePactFn
 ): void => {
   withTimeout(options, () => {
@@ -21,9 +21,9 @@ const jestMessagePactWrapper = (
 };
 
 export const messagePactWith = extendPactWith<
-  JestMessageConsumerOptions,
+  ViteMessageConsumerOptions,
   JestProvidedMessagePactFn,
-  WrapperFn<JestMessageConsumerOptions, JestProvidedMessagePactFn>
+  WrapperFn<ViteMessageConsumerOptions, JestProvidedMessagePactFn>
 >(jestMessagePactWrapper);
 
 export const xmessagePactWith = messagePactWith.skip;
