@@ -6,11 +6,19 @@ import { withTimeout } from './internal/withTimeout';
 import { extendPactWith } from './internal/scaffold';
 import { VitePactOptions, ViteProvidedPactFn } from './types';
 
-const setupProvider = (options: VitePactOptions): Pact => {
+const setupProvider = async (options: VitePactOptions): Promise<Pact> => {
   const pactMock: Pact = new Pact(options);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   beforeAll(() => pactMock.setup());
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   afterAll(() => pactMock.finalize());
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   afterEach(() => pactMock.verify());
 
   return pactMock;
@@ -26,8 +34,8 @@ const pactWithWrapper = (
   options: VitePactOptions,
   tests: ViteProvidedPactFn
 ): void => {
-  withTimeout(options, () => {
-    tests(setupProvider(applyPactOptionDefaults(options)));
+  withTimeout(options, async () => {
+    tests(await setupProvider(applyPactOptionDefaults(options)));
   });
 };
 

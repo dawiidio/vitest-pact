@@ -17,11 +17,17 @@ const postValidRequest: InteractionObject = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 describe('pactwith.only', () => {
   pactWith.only(
     { consumer: 'MyConsumer', provider: 'NoProvider' },
     (provider: Pact) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       beforeEach(() => provider.addInteraction(postValidRequest));
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       it('should only run this test', () =>
         getClient(provider)
           .get('/v2/pet/1845563262948980200')
@@ -30,7 +36,9 @@ describe('pactwith.only', () => {
     }
   );
 
-  test('the test that should be skipped', () => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  it('the test that should be skipped', () => {
     throw new Error('this test should not be run');
   });
 });

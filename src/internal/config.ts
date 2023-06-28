@@ -6,7 +6,7 @@ const logHint = (options: VitePactOptions) =>
   options.port ? `-port-${options.port}` : '';
 
 const applyCommonDefaults = (
-  options: VitePactOptions | ViteMessageConsumerOptions
+  options: Partial<VitePactOptions | ViteMessageConsumerOptions>
 ) => ({
   log: path.resolve(
     options.logDir ? options.logDir : path.join(process.cwd(), 'pact', 'logs'),
@@ -14,7 +14,7 @@ const applyCommonDefaults = (
       ? options.logFileName
       : `${options.consumer}-${
           options.provider
-        }-mockserver-interaction${logHint(options)}.log`
+        }-mockserver-interaction${logHint(options as VitePactOptions)}.log`
   ),
   dir: path.resolve(process.cwd(), 'pact/pacts'),
   logLevel: 'warn' as LogLevel,
@@ -22,12 +22,12 @@ const applyCommonDefaults = (
 });
 
 export const applyPactOptionDefaults = (
-  options: VitePactOptions
+  options: Partial<VitePactOptions>
 ): VitePactOptions => ({
   ...applyCommonDefaults(options),
   spec: 2,
   ...options,
-});
+}) as VitePactOptions;
 
 export const applyMessagePactOptionDefaults = (
   options: ViteMessageConsumerOptions

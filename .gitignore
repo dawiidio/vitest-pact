@@ -5,7 +5,6 @@
 /.DS_Store
 /coverage
 /index.js
-/index.d.ts
 /build
 /logs
 /pact/logs

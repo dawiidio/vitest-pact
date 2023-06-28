@@ -1,7 +1,6 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "jest"],
+    "types": ["node", "vite/client"],
     "declaration": true,
     "esModuleInterop": true,
     "module": "commonjs",
@@ -22,5 +21,7 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "exclude": ["./node_modules/*"],
-  "include": ["./src/**/*.ts"]
+  "include": [
+    "./src/**/*.ts"
+  ]
 }
